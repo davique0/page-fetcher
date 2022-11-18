@@ -6,13 +6,12 @@ const siteUrl = arg[0];
 const localPath = arg[1];
 
 request(siteUrl, (error, response, body) => {
-  console.log('error:', error); // Print the error if one occurred
+  if(error !== null) return console.log('error: ', error);
+  //console.log('error:', error); // Print the error if one occurred
   fs.writeFile(localPath, body, (err) => {
     if(err) return console.log(err);
-    console.log('file was saved');
+    console.log(`Downloaded and saved ${body.length} bytes to ${localPath}`);
   })
 });
 
-
-
-// console.log(arg);
+console.log('downloading file ...')
